@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Konstantet
+g = 10  # përshpejtimi i gravitetit në m/s^2
+R = 1   # rrezja e rezervuarit në m
+r = 0.02  # rrezja e vrimës në m
+h0 = 0.02  # lartësia fillestare e lëngut në m
+k = (r**2 / R**2) * np.sqrt(2 * g)
+
+# Parametrat e kohës
+t_max = 200  # koha maksimale në sekonda
+dt = 1  # hapi kohor në sekonda
+time = np.arange(0, t_max, dt)
+
+# Funksioni për të llogaritur lartësinë gjatë kohës
+def height_over_time(t, h0, k):
+    return np.maximum((np.sqrt(h0) - (k * t / 2))**2, 0)
+
+# Llogaritja e lartësisë gjatë kohës
+height = height_over_time(time, h0, k)
+
+# Vizualizimi i rezultateve
+plt.figure(figsize=(10, 6))
+plt.plot(time, height, label='Lartësia e Lëngut')
+plt.xlabel('Koha (s)')
+plt.ylabel('Lartësia (m)')
+plt.title('Lartësia e Lëngut në Rezervuar gjatë Kohës')
+plt.legend()
+plt.grid(True)
+plt.show()
